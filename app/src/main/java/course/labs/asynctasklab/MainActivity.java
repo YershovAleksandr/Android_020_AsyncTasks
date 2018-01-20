@@ -12,8 +12,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 
-public class MainActivity extends Activity implements SelectionListener,
-		DownloadFinishedListener {
+public class MainActivity extends Activity implements SelectionListener, DownloadFinishedListener
+{
 
 	private static final String TAG_NAME = "name";
 	private static final String TAG_USER = "user";
@@ -25,25 +25,24 @@ public class MainActivity extends Activity implements SelectionListener,
 	private static final String TAG_PROCESSED_FEEDS = "processed_feeds";
 	static final String TAG_TWEET_DATA = "data";
 	static final String TAG_FRIEND_RES_IDS = "friends";
-	public final static String[] FRIENDS_NAMES = { "taylorswift13",
-			"msrebeccablack", "ladygaga" };
+	public final static String[] FRIENDS_NAMES = { "taylorswift13",	"msrebeccablack", "ladygaga" };
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "Lab-Threads";
 
 	// Raw feed file IDs used to reference stored tweet data
-	public static final ArrayList<Integer> sRawTextFeedIds = new ArrayList<Integer>(
-			Arrays.asList(R.raw.tswift, R.raw.rblack, R.raw.lgaga));
+	public static final ArrayList<Integer> sRawTextFeedIds = new ArrayList<Integer>(Arrays.asList(R.raw.tswift, R.raw.rblack, R.raw.lgaga));
 
 	private FragmentManager mFragmentManager;
 	private FriendsFragment mFriendsFragment;
 	private FeedFragment mFeedFragment;
 	private DownloaderTaskFragment mDownloaderFragment;
 	private boolean mIsInteractionEnabled;
-	private String[] mFormattedFeeds = new String[sRawTextFeedIds.size()];;
+	private String[] mFormattedFeeds = new String[sRawTextFeedIds.size()];
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
@@ -58,26 +57,28 @@ public class MainActivity extends Activity implements SelectionListener,
 	}
 
 	// One time setup of UI and retained (headless) Fragment
-	private void setupFragments() {
+	private void setupFragments()
+	{
 		installFriendsFragment();
 		installDownloaderTaskFragment();
 	}
 
 	// Add Friends Fragment to Activity
-	private void installFriendsFragment() {
+	private void installFriendsFragment()
+	{
 
 		// Make new Fragment 
 		mFriendsFragment = new FriendsFragment();
 		
 		// Give Fragment to the FragmentManager
 		FragmentTransaction transaction = mFragmentManager.beginTransaction();
-		transaction.replace(R.id.fragment_container, mFriendsFragment,
-				TAG_FRIENDS_FRAGMENT);
+		transaction.replace(R.id.fragment_container, mFriendsFragment, TAG_FRIENDS_FRAGMENT);
 		transaction.commit();
 	}
 
 	// Add DownloaderTaskFragment to Activity
-	private void installDownloaderTaskFragment() {
+	private void installDownloaderTaskFragment()
+	{
 
 		// Make new Fragment 
 		mDownloaderFragment = new DownloaderTaskFragment();
@@ -88,8 +89,7 @@ public class MainActivity extends Activity implements SelectionListener,
 		mDownloaderFragment.setArguments(args);
 		
 		// Give Fragment to the FragmentManager
-		mFragmentManager.beginTransaction()
-				.add(mDownloaderFragment, TAG_DOWNLOADER_FRAGMENT).commit();
+		mFragmentManager.beginTransaction().add(mDownloaderFragment, TAG_DOWNLOADER_FRAGMENT).commit();
 	}
 
 	/*
@@ -97,7 +97,8 @@ public class MainActivity extends Activity implements SelectionListener,
 	 */
 	
 	// Called back by DownloaderTask after data has been loaded
-	public void notifyDataRefreshed(String[] feeds) {
+	public void notifyDataRefreshed(String[] feeds)
+	{
 
 		// Process downloaded data
 		parseJSON(feeds);
@@ -109,7 +110,8 @@ public class MainActivity extends Activity implements SelectionListener,
 	};
 
 	// Enable user interaction with FriendFragment
-	private void allowUserClicks() {
+	private void allowUserClicks()
+	{
 		mFriendsFragment.setAllowUserClicks(true);
 	}
 	
@@ -118,19 +120,22 @@ public class MainActivity extends Activity implements SelectionListener,
 	 */
 
 	// Report whether users interaction is enabled
-	public boolean canAllowUserClicks() {
+	public boolean canAllowUserClicks()
+	{
 		return mIsInteractionEnabled;
 	}
 
 	// Installs the FeedFragment when a Friend name is 
 	// selected in the FriendsFragment 
 	@Override
-	public void onItemSelected(int position) {
+	public void onItemSelected(int position)
+	{
 		installFeedFragment(mFormattedFeeds[position]);
 	}
 
 	// Add FeedFragment to Activity
-	private void installFeedFragment(String tweetData) {
+	private void installFeedFragment(String tweetData)
+	{
 		// Make new Fragment
 		mFeedFragment = new FeedFragment();
 
@@ -141,25 +146,25 @@ public class MainActivity extends Activity implements SelectionListener,
 
 		// Give Fragment to the FragmentManager
 		FragmentTransaction transaction = mFragmentManager.beginTransaction();
-		transaction.replace(R.id.fragment_container, mFeedFragment,
-				TAG_FEED_FRAGMENT);
+		transaction.replace(R.id.fragment_container, mFeedFragment,	TAG_FEED_FRAGMENT);
 		transaction.addToBackStack(null);
 		transaction.commit();
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle savedInstanceState) {
-		if (null != mFriendsFragment) {
-			savedInstanceState.putString(TAG_FRIENDS_FRAGMENT,
-					mFriendsFragment.getTag());
+	protected void onSaveInstanceState(Bundle savedInstanceState)
+	{
+		if (null != mFriendsFragment)
+		{
+			savedInstanceState.putString(TAG_FRIENDS_FRAGMENT, mFriendsFragment.getTag());
 		}
-		if (null != mFeedFragment) {
-			savedInstanceState.putString(TAG_FEED_FRAGMENT,
-					mFeedFragment.getTag());
+		if (null != mFeedFragment)
+		{
+			savedInstanceState.putString(TAG_FEED_FRAGMENT,	mFeedFragment.getTag());
 		}
-		if (null != mDownloaderFragment) {
-			savedInstanceState.putString(TAG_DOWNLOADER_FRAGMENT,
-					mDownloaderFragment.getTag());
+		if (null != mDownloaderFragment)
+		{
+			savedInstanceState.putString(TAG_DOWNLOADER_FRAGMENT, mDownloaderFragment.getTag());
 		}
 		savedInstanceState.putBoolean(TAG_IS_DATA_AVAILABLE, mIsInteractionEnabled);
 		savedInstanceState.putStringArray(TAG_PROCESSED_FEEDS, mFormattedFeeds);
@@ -169,35 +174,34 @@ public class MainActivity extends Activity implements SelectionListener,
 	}
 
 	// Restore saved instance state
-	private void restoreState(Bundle savedInstanceState) {
+	private void restoreState(Bundle savedInstanceState)
+	{
 		
 		//Fragments tags were saved in onSavedInstanceState 
-		mFriendsFragment = (FriendsFragment) mFragmentManager
-				.findFragmentByTag(savedInstanceState
-						.getString(TAG_FRIENDS_FRAGMENT));
+		mFriendsFragment = (FriendsFragment) mFragmentManager.findFragmentByTag(savedInstanceState.getString(TAG_FRIENDS_FRAGMENT));
 
-		mFeedFragment = (FeedFragment) mFragmentManager
-				.findFragmentByTag(savedInstanceState
-						.getString(TAG_FEED_FRAGMENT));
+		mFeedFragment = (FeedFragment) mFragmentManager.findFragmentByTag(savedInstanceState.getString(TAG_FEED_FRAGMENT));
 
-		mDownloaderFragment = (DownloaderTaskFragment) mFragmentManager
-				.findFragmentByTag(savedInstanceState
-						.getString(TAG_DOWNLOADER_FRAGMENT));
+		mDownloaderFragment = (DownloaderTaskFragment) mFragmentManager.findFragmentByTag(savedInstanceState.getString(TAG_DOWNLOADER_FRAGMENT));
 
 		mIsInteractionEnabled = savedInstanceState.getBoolean(TAG_IS_DATA_AVAILABLE);
-		if (mIsInteractionEnabled) {
-			mFormattedFeeds = savedInstanceState
-					.getStringArray(TAG_PROCESSED_FEEDS);
+		if (mIsInteractionEnabled)
+		{
+			mFormattedFeeds = savedInstanceState.getStringArray(TAG_PROCESSED_FEEDS);
 		}
 	}
 
 	// Convert raw data (in JSON format) into text for display
-	private void parseJSON(String[] feeds) {
+	private void parseJSON(String[] feeds)
+	{
 		JSONArray[] JSONFeeds = new JSONArray[feeds.length];
-		for (int i = 0; i < JSONFeeds.length; i++) {
-			try {
+		for (int i = 0; i < JSONFeeds.length; i++)
+		{
+			try
+			{
 				JSONFeeds[i] = new JSONArray(feeds[i]);
-			} catch (JSONException e) {
+			} catch (JSONException e)
+			{
 				e.printStackTrace();
 			}
 
@@ -207,13 +211,16 @@ public class MainActivity extends Activity implements SelectionListener,
 
 			// string buffer for feeds
 			StringBuffer tweetRec = new StringBuffer("");
-			for (int j = 0; j < tmp.length(); j++) {
-				try {
+			for (int j = 0; j < tmp.length(); j++)
+			{
+				try
+				{
 					tweet = tmp.getJSONObject(j).getString(TAG_TEXT);
-					JSONObject user = (JSONObject) tmp.getJSONObject(j).get(
-							TAG_USER);
+					JSONObject user = (JSONObject) tmp.getJSONObject(j).get(TAG_USER);
 					name = user.getString(TAG_NAME);
-				} catch (JSONException e) {
+				}
+				catch (JSONException e)
+				{
 					e.printStackTrace();
 				}
 				tweetRec.append(name + " - " + tweet + "\n\n");
