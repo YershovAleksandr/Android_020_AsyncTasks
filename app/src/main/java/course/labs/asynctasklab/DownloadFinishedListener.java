@@ -1,5 +1,6 @@
 package course.labs.asynctasklab;
 
-interface DownloadFinishedListener {
+interface DownloadFinishedListener
+{
 	void notifyDataRefreshed(String[] feeds);
 }
