@@ -12,7 +12,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-public class DownloaderTaskFragment extends Fragment {
+public class DownloaderTaskFragment extends Fragment
+{
 
 	private DownloadFinishedListener mCallback;
 	private Context mContext;
@@ -21,7 +22,8 @@ public class DownloaderTaskFragment extends Fragment {
 	private static final String TAG = "Lab-Threads";
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 
 		// Preserve across reconfigurations
@@ -46,24 +48,28 @@ public class DownloaderTaskFragment extends Fragment {
 	// Assign current hosting Activity to mCallback
 	// Store application context for use by downloadTweets()
 	@Override
-	public void onAttach(Activity activity) {
+	public void onAttach(Activity activity)
+	{
 		super.onAttach(activity);
 
 		mContext = activity.getApplicationContext(); 
 
 		// Make sure that the hosting activity has implemented
 		// the correct callback interface.
-		try {
+		try
+		{
 			mCallback = (DownloadFinishedListener) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString()
-					+ " must implement DownloadFinishedListener");
+		}
+		catch (ClassCastException e)
+		{
+			throw new ClassCastException(activity.toString() + " must implement DownloadFinishedListener");
 		}
 	}
 
 	// Null out mCallback
 	@Override
-	public void onDetach() {
+	public void onDetach()
+	{
 		super.onDetach();
 		mCallback = null;
 	}
