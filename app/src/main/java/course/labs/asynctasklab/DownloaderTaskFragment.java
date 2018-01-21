@@ -27,18 +27,18 @@ public class DownloaderTaskFragment extends Fragment {
 		// Preserve across reconfigurations
 		setRetainInstance(true);
 
-		// TODO: Create new DownloaderTask that "downloads" data
+		// DO: Create new DownloaderTask that "downloads" data
 
 		DownloaderTask dt = new DownloaderTask();
 
-		// TODO: Retrieve arguments from DownloaderTaskFragment
+		// DO: Retrieve arguments from DownloaderTaskFragment
 		// Prepare them for use with DownloaderTask. 
 
 		ArrayList<Integer> resids = getArguments().getIntegerArrayList(MainActivity.TAG_FRIEND_RES_IDS);
 
 		Integer[] ress = resids.toArray(new Integer[resids.size()]);
 
-		// TODO: Start the DownloaderTask 
+		// DO: Start the DownloaderTask
 
 		dt.execute(ress);
 
@@ -68,7 +68,7 @@ public class DownloaderTaskFragment extends Fragment {
 		mCallback = null;
 	}
 
-	// TODO: Implement an AsyncTask subclass called DownLoaderTask.
+	// DO: Implement an AsyncTask subclass called DownLoaderTask.
 	// This class must use the downloadTweets method (currently commented
 	// out). Ultimately, it must also pass newly available data back to 
 	// the hosting Activity using the DownloadFinishedListener interface.
@@ -79,32 +79,18 @@ public class DownloaderTaskFragment extends Fragment {
 		@Override
 		protected String[] doInBackground(Integer... res) {
 
-
-			//mCallback. res id
-
-
 			String[] str = downloadTweets(res);
-
 
 			return str;
 		}
 
-		@Override
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
-
-		}
 
 		@Override
 		protected void onPostExecute(String[] result) {
-			//
-			//mContext
-			//		NotifyDataRefresh();
-
 			mCallback.notifyDataRefreshed(result);
 		}
 
-		// TODO: Uncomment this helper method
+		// DO: Uncomment this helper method
 		// Simulates downloading Twitter data from the network
 
 
