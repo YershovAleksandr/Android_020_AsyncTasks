@@ -73,7 +73,7 @@ public class MainActivity extends Activity implements SelectionListener, Downloa
 		
 		// Give Fragment to the FragmentManager
 		FragmentTransaction transaction = mFragmentManager.beginTransaction();
-		transaction.replace(R.id.fragment_container, mFriendsFragment, TAG_FRIENDS_FRAGMENT);
+		transaction.replace(R.id.fragment_container, mFriendsFragment, TAG_FRIENDS_FRAGMENT);	//TAG for future search
 		transaction.commit();
 	}
 
