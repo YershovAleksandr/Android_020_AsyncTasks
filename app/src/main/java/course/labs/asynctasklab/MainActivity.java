@@ -106,7 +106,7 @@ public class MainActivity extends Activity implements SelectionListener, Downloa
 		// Enable user interaction
 		mIsInteractionEnabled = true;
 		allowUserClicks();
-	};
+	}
 
 	// Enable user interaction with FriendFragment
 	private void allowUserClicks()
