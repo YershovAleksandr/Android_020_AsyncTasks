@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends Activity implements SelectionListener, DownloadFinishedListener
 {
@@ -55,6 +56,8 @@ public class MainActivity extends Activity implements SelectionListener, Downloa
 		} else {
 			setupFragments();
 		}
+
+		Log.i(TAG, "Var = " + mIsInteractionEnabled);
 	}
 
 	// One time setup of UI and retained (headless) Fragment
