@@ -1,4 +1,4 @@
-package course.labs.asynctasklab.tests;
+package course.labs.asynctasklab;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.view.View;
 import com.robotium.solo.Condition;
 import com.robotium.solo.Solo;
 
-import course.labs.asynctasklab.MainActivity;
+//import course.labs.asynctasklab.MainActivity;
 
 public class FeedTest extends ActivityInstrumentationTestCase2<MainActivity> {
 	private Solo solo;
