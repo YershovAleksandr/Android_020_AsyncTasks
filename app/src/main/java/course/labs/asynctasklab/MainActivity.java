@@ -100,14 +100,12 @@ public class MainActivity extends Activity implements SelectionListener, Downloa
 	// Called back by DownloaderTask after data has been loaded
 	public void notifyDataRefreshed(String[] feeds)
 	{
-
 		// Process downloaded data
 		parseJSON(feeds);
 	
 		// Enable user interaction
 		mIsInteractionEnabled = true;
 		allowUserClicks();
-		
 	};
 
 	// Enable user interaction with FriendFragment
