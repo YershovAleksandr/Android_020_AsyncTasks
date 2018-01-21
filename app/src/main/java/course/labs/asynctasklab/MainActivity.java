@@ -27,6 +27,7 @@ public class MainActivity extends Activity implements SelectionListener, Downloa
 	static final String TAG_FRIEND_RES_IDS = "friends";
 	public final static String[] FRIENDS_NAMES = { "taylorswift13",	"msrebeccablack", "ladygaga" };
 
+
 	@SuppressWarnings("unused")
 	private static final String TAG = "Lab-Threads";
 
