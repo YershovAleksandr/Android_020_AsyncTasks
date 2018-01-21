@@ -12,64 +12,58 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-public class DownloaderTaskFragment extends Fragment
-{
+public class DownloaderTaskFragment extends Fragment {
 
 	private DownloadFinishedListener mCallback;
 	private Context mContext;
-	
-	@SuppressWarnings ("unused")
+
+	@SuppressWarnings("unused")
 	private static final String TAG = "Lab-Threads";
 
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// Preserve across reconfigurations
 		setRetainInstance(true);
-		
+
 		// TODO: Create new DownloaderTask that "downloads" data
 
-        
-		
+		DownloaderTask dt = new DownloaderTask();
+
 		// TODO: Retrieve arguments from DownloaderTaskFragment
 		// Prepare them for use with DownloaderTask. 
 
-        
-        
-        
+		ArrayList<Integer> resids = getArguments().getIntegerArrayList(MainActivity.TAG_FRIEND_RES_IDS);
+
+		Integer[] ress = resids.toArray(new Integer[resids.size()]);
+
 		// TODO: Start the DownloaderTask 
-		
-        
+
+		dt.execute(ress);
 
 	}
 
 	// Assign current hosting Activity to mCallback
 	// Store application context for use by downloadTweets()
 	@Override
-	public void onAttach(Activity activity)
-	{
+	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 
-		mContext = activity.getApplicationContext(); 
+		mContext = activity.getApplicationContext();
 
 		// Make sure that the hosting activity has implemented
 		// the correct callback interface.
-		try
-		{
+		try {
 			mCallback = (DownloadFinishedListener) activity;
-		}
-		catch (ClassCastException e)
-		{
+		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString() + " must implement DownloadFinishedListener");
 		}
 	}
 
 	// Null out mCallback
 	@Override
-	public void onDetach()
-	{
+	public void onDetach() {
 		super.onDetach();
 		mCallback = null;
 	}
@@ -79,21 +73,42 @@ public class DownloaderTaskFragment extends Fragment
 	// out). Ultimately, it must also pass newly available data back to 
 	// the hosting Activity using the DownloadFinishedListener interface.
 
-//	public class DownloaderTask extends ... {
-	
 
-    
-    
-    
-    
-    
-    
-    
-        // TODO: Uncomment this helper method
+	class DownloaderTask extends AsyncTask <Integer, Integer, String[]> {
+
+		@Override
+		protected String[] doInBackground(Integer... res) {
+
+
+			//mCallback. res id
+
+
+			String[] str = downloadTweets(res);
+
+
+			return str;
+		}
+
+		@Override
+		protected void onProgressUpdate(Integer... progress) {
+			//setProgressPercent(progress[0]);
+
+		}
+
+		@Override
+		protected void onPostExecute(String[] result) {
+			//
+			//mContext
+			//		NotifyDataRefresh();
+
+			mCallback.notifyDataRefreshed(result);
+		}
+
+		// TODO: Uncomment this helper method
 		// Simulates downloading Twitter data from the network
 
-        /*
-         private String[] downloadTweets(Integer resourceIDS[]) {
+
+		private String[] downloadTweets(Integer resourceIDS[]) {
 			final int simulatedDelay = 2000;
 			String[] feeds = new String[resourceIDS.length];
 			try {
@@ -107,8 +122,7 @@ public class DownloaderTaskFragment extends Fragment
 						e.printStackTrace();
 					}
 
-					inputStream = mContext.getResources().openRawResource(
-							resourceIDS[idx]);
+					inputStream = mContext.getResources().openRawResource(resourceIDS[idx]);
 					in = new BufferedReader(new InputStreamReader(inputStream));
 
 					String readLine;
@@ -130,13 +144,9 @@ public class DownloaderTaskFragment extends Fragment
 
 			return feeds;
 		}
-         */
 
 
-    
-    
-    
-    
+	}
     
     
 
