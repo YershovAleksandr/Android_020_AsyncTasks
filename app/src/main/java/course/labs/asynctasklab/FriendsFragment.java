@@ -58,6 +58,7 @@ public class FriendsFragment extends ListFragment
 		else
 		{
 			getListView().setBackgroundColor(Color.DKGRAY);
+			//getListView().setBackgroundColor(Color.RED);
 		}
 	}
 
