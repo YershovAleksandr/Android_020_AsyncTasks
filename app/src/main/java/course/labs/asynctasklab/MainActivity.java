@@ -58,6 +58,7 @@ public class MainActivity extends Activity implements SelectionListener, Downloa
 		}
 
 		Log.i(TAG, "Var = " + mIsInteractionEnabled);
+		//mIsInteractionEnabled = true;
 	}
 
 	// One time setup of UI and retained (headless) Fragment
